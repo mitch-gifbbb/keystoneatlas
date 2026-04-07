@@ -53,9 +53,9 @@ body {
 .header-title span { color: var(--gold); }
 .header-sub {
   font-family: var(--font-ui);
-  font-size: 10px;
-  letter-spacing: .35em;
-  color: var(--dim);
+  font-size: 12px;
+  letter-spacing: .25em;
+  color: var(--muted);
   margin-top: 8px;
 }
 
@@ -164,7 +164,7 @@ body {
   color: #e8e4d8; letter-spacing: .04em;
 }
 .panel-subtitle {
-  font-size: 9px; letter-spacing: .22em;
+  font-size: 11px; letter-spacing: .14em;
   color: var(--gold); margin-top: 3px; text-transform: uppercase;
 }
 .close-btn {
@@ -178,7 +178,7 @@ body {
 .metrics { display: flex; flex-direction: column; gap: 16px; margin-bottom: 22px; }
 .metric { display: flex; flex-direction: column; gap: 5px; }
 .metric-header { display: flex; align-items: center; justify-content: space-between; }
-.metric-label { font-size: 9px; letter-spacing: .2em; color: var(--dim); text-transform: uppercase; }
+.metric-label { font-size: 11px; letter-spacing: .1em; color: var(--muted); text-transform: uppercase; }
 .metric-right { display: flex; align-items: center; gap: 7px; }
 .metric-val { font-size: 14px; font-weight: 400; color: #e8e4d8; }
 .tag {
@@ -205,7 +205,7 @@ body {
   position: absolute; top: -3px; height: 9px;
   width: 1px; background: #ffffff15;
 }
-.metric-note { font-size: 9px; color: #2a3245; margin-top: 3px; line-height: 1.5; }
+.metric-note { font-size: 11px; color: var(--muted); margin-top: 3px; line-height: 1.5; }
 
 /* moonshot card */
 .moonshot-card {
@@ -217,16 +217,16 @@ body {
   display: flex; align-items: flex-start;
   justify-content: space-between; margin-bottom: 10px;
 }
-.moonshot-label { font-size: 9px; letter-spacing: .18em; color: #6a4fbf; text-transform: uppercase; }
-.moonshot-sub   { font-size: 9px; color: #6a4fbf; margin-top: 2px; }
+.moonshot-label { font-size: 11px; letter-spacing: .1em; color: var(--purple); text-transform: uppercase; }
+.moonshot-sub   { font-size: 11px; color: #8a7abf; margin-top: 2px; }
 .moonshot-num   { font-family: var(--font-display); font-size: 32px; font-weight: 300; color: var(--purple); line-height: 1; }
-.moonshot-note  { font-size: 10px; color: #5a4a80; margin-top: 10px; line-height: 1.6; font-style: italic; }
+.moonshot-note  { font-size: 12px; color: #8a7abf; margin-top: 10px; line-height: 1.6; font-style: italic; }
 
 /* ── DIVIDER ── */
 .divider { height: 1px; background: #c9a84c0f; margin: 20px 0; }
 
 /* ── INTEL ── */
-.sec-label { font-size: 9px; letter-spacing: .22em; color: var(--dim); text-transform: uppercase; margin-bottom: 10px; }
+.sec-label { font-size: 11px; letter-spacing: .1em; color: var(--muted); text-transform: uppercase; margin-bottom: 10px; }
 .intel-brief {
   font-size: 12px; color: #6a7585; line-height: 1.75;
   padding: 14px 14px 14px 16px;
@@ -251,8 +251,8 @@ body {
 }
 .rfr-btn {
   background: none; border: 1px solid var(--gold-dim);
-  color: var(--gold); font-size: 9px; font-family: var(--font-ui);
-  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--gold); font-size: 11px; font-family: var(--font-ui);
+  letter-spacing: .08em; text-transform: uppercase;
   padding: 6px 12px; border-radius: 4px;
   cursor: pointer; display: flex; align-items: center; gap: 5px;
   transition: border-color .2s, background .2s;
@@ -303,15 +303,15 @@ body {
 /* ── FOOTER ── */
 .panel-footer {
   margin-top: auto; padding-top: 20px;
-  font-size: 9px; color: var(--deep);
-  text-align: center; letter-spacing: .08em;
+  font-size: 11px; color: var(--dim);
+  text-align: center; letter-spacing: .06em;
 }
 
 /* ── PAGE FOOTER ── */
 .page-footer {
   text-align: center; padding: 32px 24px;
   border-top: 1px solid #c9a84c0a;
-  font-size: 9px; color: var(--deep); letter-spacing: .14em;
+  font-size: 11px; color: var(--dim); letter-spacing: .1em;
 }
 
 /* ── SCAN ANIMATION ── */
@@ -414,7 +414,7 @@ body {
   </div>
 </div>
 
-<footer class="page-footer">© Keystone Atlas &nbsp;·&nbsp; For accredited investors only &nbsp;·&nbsp; Not financial advice</footer>
+<footer class="page-footer">© Keystone Atlas &nbsp;·&nbsp; For educational purposes only &nbsp;·&nbsp; Not financial advice</footer>
 
 <script>
 const DATA = [
