@@ -74,12 +74,12 @@ body {
 .pyramid-col {
   flex: 0 0 auto;
   width: 100%;
-  max-width: 560px;
+  max-width: 720px;
   transition: max-width .4s ease;
 }
 
 .main.panel-open .pyramid-col {
-  max-width: 480px;
+  max-width: 580px;
 }
 
 /* ── PYRAMID SVG ── */
@@ -342,38 +342,38 @@ body {
 
 <div class="main" id="main">
   <div class="pyramid-col">
-    <div style="position:relative;max-width:560px;margin:0 auto">
+    <div style="position:relative;margin:0 auto">
       <div class="scan-line"></div>
       <svg class="pyramid-svg" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
 
         <g class="pyr-layer" id="pl-0" onclick="openCard(0)">
           <polygon points="0,390 600,390 553,330 47,330" fill="#0b1420" stroke="#c9a84c55" stroke-width="1" style="animation:layerIn .4s ease .05s both"/>
-          <text x="300" y="362" text-anchor="middle" dominant-baseline="central" fill="#c9a84c" font-size="9" letter-spacing="4" font-family="Rajdhani,sans-serif" pointer-events="none" style="animation:layerIn .4s ease .05s both">ENERGY &amp; POWER</text>
+          <text x="300" y="362" text-anchor="middle" dominant-baseline="central" fill="#c9a84c" font-size="13" letter-spacing="4" font-family="Rajdhani,sans-serif" pointer-events="none" style="animation:layerIn .4s ease .05s both">ENERGY &amp; POWER</text>
         </g>
 
         <g class="pyr-layer" id="pl-1" onclick="openCard(1)">
           <polygon points="47,330 553,330 505,270 95,270" fill="#0e1727" stroke="#c9a84c1a" stroke-width="0.8" style="animation:layerIn .4s ease .18s both"/>
-          <text x="300" y="301" text-anchor="middle" dominant-baseline="central" fill="#b8c0d0" font-size="9" letter-spacing="3" font-family="Rajdhani,sans-serif" pointer-events="none" style="animation:layerIn .4s ease .18s both">CHIPS &amp; HARDWARE</text>
+          <text x="300" y="301" text-anchor="middle" dominant-baseline="central" fill="#b8c0d0" font-size="13" letter-spacing="3" font-family="Rajdhani,sans-serif" pointer-events="none" style="animation:layerIn .4s ease .18s both">CHIPS &amp; HARDWARE</text>
         </g>
 
         <g class="pyr-layer" id="pl-2" onclick="openCard(2)">
           <polygon points="95,270 505,270 458,210 142,210" fill="#111b2e" stroke="#c9a84c22" stroke-width="0.8" style="animation:layerIn .4s ease .32s both"/>
-          <text x="300" y="241" text-anchor="middle" dominant-baseline="central" fill="#b8c0d0" font-size="9" letter-spacing="3" font-family="Rajdhani,sans-serif" pointer-events="none" style="animation:layerIn .4s ease .32s both">DATA CENTERS</text>
+          <text x="300" y="241" text-anchor="middle" dominant-baseline="central" fill="#b8c0d0" font-size="13" letter-spacing="3" font-family="Rajdhani,sans-serif" pointer-events="none" style="animation:layerIn .4s ease .32s both">DATA CENTERS</text>
         </g>
 
         <g class="pyr-layer" id="pl-3" onclick="openCard(3)">
           <polygon points="142,210 458,210 411,150 189,150" fill="#152035" stroke="#c9a84c2a" stroke-width="0.8" style="animation:layerIn .4s ease .46s both"/>
-          <text x="300" y="181" text-anchor="middle" dominant-baseline="central" fill="#b8c0d0" font-size="9" letter-spacing="3" font-family="Rajdhani,sans-serif" pointer-events="none" style="animation:layerIn .4s ease .46s both">MODEL COMPANIES</text>
+          <text x="300" y="181" text-anchor="middle" dominant-baseline="central" fill="#b8c0d0" font-size="13" letter-spacing="3" font-family="Rajdhani,sans-serif" pointer-events="none" style="animation:layerIn .4s ease .46s both">MODEL COMPANIES</text>
         </g>
 
         <g class="pyr-layer" id="pl-4" onclick="openCard(4)">
           <polygon points="189,150 411,150 363,90 237,90" fill="#192640" stroke="#c9a84c33" stroke-width="0.8" style="animation:layerIn .4s ease .60s both"/>
-          <text x="300" y="121" text-anchor="middle" dominant-baseline="central" fill="#b8c0d0" font-size="7" letter-spacing="1.5" font-family="Rajdhani,sans-serif" pointer-events="none" style="animation:layerIn .4s ease .60s both">SOFTWARE INFRASTRUCTURE</text>
+          <text x="300" y="121" text-anchor="middle" dominant-baseline="central" fill="#b8c0d0" font-size="8" letter-spacing="1.5" font-family="Rajdhani,sans-serif" pointer-events="none" style="animation:layerIn .4s ease .60s both">SOFTWARE INFRASTRUCTURE</text>
         </g>
 
         <g class="pyr-layer" id="pl-5" onclick="openCard(5)">
           <polygon points="237,90 363,90 300,10" fill="#1d2d4a" stroke="#c9a84c55" stroke-width="0.8" style="animation:layerIn .4s ease .74s both"/>
-          <text x="300" y="72" text-anchor="middle" dominant-baseline="central" fill="#c9a84c" font-size="6.5" letter-spacing="1.5" font-family="Rajdhani,sans-serif" pointer-events="none" style="animation:layerIn .4s ease .74s both">APPS &amp; SERVICES</text>
+          <text x="300" y="72" text-anchor="middle" dominant-baseline="central" fill="#c9a84c" font-size="7.5" letter-spacing="1.5" font-family="Rajdhani,sans-serif" pointer-events="none" style="animation:layerIn .4s ease .74s both">APPS &amp; SERVICES</text>
         </g>
 
       </svg>
@@ -409,7 +409,7 @@ body {
       </div>
       <div class="co-grid" id="coGrid"></div>
 
-      <div class="panel-footer">Prices simulated for demonstration &nbsp;·&nbsp; Scores are model-generated estimates</div>
+      <div class="panel-footer">Live prices via Finnhub &nbsp;·&nbsp; Scores are model-generated estimates &nbsp;·&nbsp; For educational purposes only</div>
     </div>
   </div>
 </div>
@@ -427,88 +427,122 @@ const DATA = [
     brief: "Every AI model that runs — every query answered, every image generated — requires electricity. The AI buildout is creating a power demand shock unlike anything since the industrial revolution, and the grid is not ready for it. Utilities that locked in long-term data center contracts early, clean energy firms with hyperscaler agreements, and small modular reactor developers are sitting at the base of a wave that hasn't broken yet. This is the layer most investors overlook because it isn't glamorous — which is exactly why the opportunity exists.",
     bullets: ["Data Center Power","Grid Support","Clean Energy Solutions","Reliable Electricity"],
     cos: [
-      { t:"VOLT", n:"Volt Grid Co.", w:"Controls 18% of AI data center power contracts globally." },
-      { t:"SOLX", n:"SolarX Systems", w:"Only clean-energy firm with direct agreements to 4 hyperscalers." },
-      { t:"NUC1", n:"NuclearOne", w:"SMR pipeline positions it as baseline power of the AI era." },
-      { t:"AMPR", n:"Ampere Power", w:"Grid stabilization tech critical as AI energy demand spikes." }
+      { t:"NEE",  n:"NextEra Energy",       w:"World's largest renewable energy producer — dominant in solar and wind powering AI data centers." },
+      { t:"CEG",  n:"Constellation Energy", w:"Largest US nuclear operator, reviving plants specifically to meet AI data center power demand." },
+      { t:"VST",  n:"Vistra Corp",          w:"Fastest-growing power producer in Texas, winning contracts with hyperscalers at record pace." },
+      { t:"D",    n:"Dominion Energy",      w:"Major utility with strategic AI campus power agreements across the US East Coast corridor." }
     ]
   },
   {
     name: "Chips & Hardware",
     sp: { val:92, label:"3.4x S&P", tag:"green", tagLabel:"Outperform", desc:"Projected 5yr outperformance vs S&P 500" },
     maturity: { val:52, label:"Growth Phase", tag:"gold", tagLabel:"Mid Cycle", desc:"Maturing but AI demand acceleration still ahead of supply" },
-    risk: { val:42, label:"Balanced", tag:"gold", tagLabel:"Balanced", fillColor:"#c9a84c", desc:"Keystone picks weighted toward fabless designers with diversified clients" },
+    risk: { val:42, label:"Balanced", tag:"gold", tagLabel:"Balanced", fillColor:"#c9a84c", desc:"Picks weighted toward fabless designers with diversified AI clients" },
     moon: { num:"40x", pct:72, tagLabel:"High Upside", note:"If AI accelerator demand continues compounding at current rates, picks made at this stage of the chip cycle historically return 40x over a decade — similar to NVIDIA's trajectory from 2015." },
     brief: "AI runs on silicon. Every foundation model, every inference call, every autonomous system requires specialized processors that general-purpose chips simply cannot handle efficiently. The market learned this with NVIDIA — but NVIDIA's rise revealed a structural gap: one company cannot supply the world. The next wave belongs to the firms building AI accelerators for specific workloads, the foundries capable of manufacturing at sub-3nm scale, and the memory architects solving the bandwidth bottleneck that limits how fast models can actually think.",
     bullets: ["Processing Units (GPUs, AI Accelerators)","Manufacturing (Foundries)","Advanced Chip Design"],
     cos: [
-      { t:"GPUX", n:"GPUx Inc.", w:"AI inference chips at 3x efficiency over incumbents." },
-      { t:"FNDR", n:"Foundry Prime", w:"Only non-TSMC option for sub-3nm AI accelerator production." },
-      { t:"SILV", n:"SilverLogic", w:"Memory bandwidth architecture — the hidden bottleneck solved." },
-      { t:"AXON", n:"AxonChip", w:"Fastest time-to-silicon for custom LLM training ASICs." }
+      { t:"NVDA", n:"NVIDIA",   w:"Dominant AI GPU maker — its H100 and Blackwell chips power virtually every major AI training run globally." },
+      { t:"AMD",  n:"AMD",      w:"The credible alternative to NVIDIA, gaining share in AI inference with MI300 series accelerators." },
+      { t:"AVGO", n:"Broadcom", w:"Custom AI chip designer for Google, Meta and Apple — ASIC revenue growing faster than its core business." },
+      { t:"TSM",  n:"TSMC",     w:"Manufactures chips for NVIDIA, AMD and Apple — no advanced AI chip exists without TSMC's foundries." }
     ]
   },
   {
     name: "Data Centers",
     sp: { val:85, label:"2.7x S&P", tag:"green", tagLabel:"Outperform", desc:"Projected 5yr outperformance vs S&P 500" },
     maturity: { val:44, label:"Expansion Phase", tag:"gold", tagLabel:"Mid Cycle", desc:"AI workloads driving a new build cycle with long lead times" },
-    risk: { val:22, label:"Low Risk", tag:"green", tagLabel:"Favorable", fillColor:"#4caf84", desc:"Keystone picks are REIT-structured with hyperscaler anchor tenants" },
+    risk: { val:22, label:"Low Risk", tag:"green", tagLabel:"Favorable", fillColor:"#4caf84", desc:"REIT-structured picks with hyperscaler anchor tenants provide asset-backed stability" },
     moon: { num:"25x", pct:58, tagLabel:"Strong Upside", note:"If hyperscaler capex commitments hold and edge computing expands, data center REITs and cooling plays could 25x — with the added security of hard asset backing throughout." },
     brief: "Data centers are the factories of the AI economy. Unlike software, they require years to plan, permit, and build — which means the supply shortage being felt today will persist for at least a decade. The most defensible positions are in colocation providers with power already secured, cooling technology companies solving the thermal crisis that dense GPU racks create, and real estate operators whose land sits on the right side of fiber and power infrastructure. These are hard assets in an era of digital abundance — a rare combination.",
     bullets: ["Server Colocation","Power & Space","High-Performance Cooling","Real Estate"],
     cos: [
-      { t:"COLX", n:"ColoX REIT", w:"12 hyperscale campuses in low-latency fiber corridors." },
-      { t:"CRYO", n:"CryoCool", w:"Liquid cooling reduces PUE to 1.05 as rack density rises." },
-      { t:"EDGN", n:"EdgeNest", w:"Edge DC rollout matches AI inference moving to the edge." },
-      { t:"PWRB", n:"PowerBlock", w:"Modular power units allow rapid expansion with no grid upgrade." }
+      { t:"EQIX", n:"Equinix",         w:"World's largest data center REIT — 260 facilities across 33 countries, the backbone of internet interconnection." },
+      { t:"AMT",  n:"American Tower",  w:"Expanding from cell towers into edge data centers, perfectly positioned for AI inference at the edge." },
+      { t:"DLR",  n:"Digital Realty",  w:"Global data center operator with 300+ facilities, hosting all major hyperscalers under long-term leases." },
+      { t:"IRON", n:"Iron Mountain",   w:"Legacy records company reinvented as a data center REIT, converting vaults into AI-ready facilities." }
     ]
   },
   {
     name: "Model Companies",
     sp: { val:96, label:"4.8x S&P", tag:"green", tagLabel:"Outperform", desc:"Projected 5yr outperformance vs S&P 500" },
     maturity: { val:35, label:"Early Growth", tag:"green", tagLabel:"Early Entry", desc:"Foundation model race still wide open — significant upside ahead" },
-    risk: { val:48, label:"Balanced", tag:"gold", tagLabel:"Balanced", fillColor:"#c9a84c", desc:"Keystone picks focused on enterprise API revenue, not consumer bets" },
+    risk: { val:48, label:"Balanced", tag:"gold", tagLabel:"Balanced", fillColor:"#c9a84c", desc:"Picks focused on enterprise API revenue streams, not consumer speculation" },
     moon: { num:"60x", pct:82, tagLabel:"Moonshot", note:"The winning foundation model company could become the most valuable business in history. Picks made before enterprise consolidation locks in — when the market doubles — could return 60x on selected positions." },
     brief: "Foundation models are the new operating systems. Just as Windows and iOS became the platforms everything else was built on, the leading AI models are becoming the invisible infrastructure of every enterprise workflow. The companies that win this layer don't just have good models — they have distribution, API lock-in, and the data flywheel advantages that compound with every new customer. We are still early enough that the winner is not obvious, which is where the asymmetric opportunity lives.",
     bullets: ["Foundation Models","API Access","Model Development","Strategic Model Partnerships"],
     cos: [
-      { t:"MODL", n:"ModelCore", w:"Foundation model with highest enterprise adoption in sector." },
-      { t:"APIX", n:"APIxAI", w:"API-first model — infrastructure players build on their rails." },
-      { t:"SYNP", n:"Synapse AI", w:"Multimodal model dominant in healthcare diagnostics." },
-      { t:"PARA", n:"ParaLLM", w:"Open-weight model with fastest growing developer ecosystem." }
+      { t:"MSFT",  n:"Microsoft", w:"OpenAI's primary commercial partner — Azure AI is becoming the default enterprise AI deployment platform." },
+      { t:"GOOGL", n:"Alphabet",  w:"Owns Gemini, Google Cloud AI, and DeepMind — the only company that owns chips, models, and distribution." },
+      { t:"META",  n:"Meta",      w:"Llama open-weight models are reshaping the market — Meta's AI infrastructure spend is the largest in history." },
+      { t:"AMZN",  n:"Amazon",    w:"AWS Bedrock gives enterprises access to multiple foundation models — Amazon's AI layer is quietly dominant." }
     ]
   },
   {
     name: "Software Infrastructure",
     sp: { val:88, label:"3.1x S&P", tag:"green", tagLabel:"Outperform", desc:"Projected 5yr outperformance vs S&P 500" },
     maturity: { val:48, label:"Scaling Phase", tag:"gold", tagLabel:"Mid Cycle", desc:"Enterprise adoption accelerating with strong switching costs" },
-    risk: { val:35, label:"Low Risk", tag:"green", tagLabel:"Favorable", fillColor:"#4caf84", desc:"Keystone picks chosen for sticky SaaS models with high retention" },
+    risk: { val:35, label:"Low Risk", tag:"green", tagLabel:"Favorable", fillColor:"#4caf84", desc:"Picks chosen for sticky SaaS models with high enterprise retention rates" },
     moon: { num:"15x", pct:42, tagLabel:"Solid Upside", note:"As every enterprise deploys AI, the infrastructure stack beneath them compounds quietly. Picks with deep workflow integration could 15x as AI moves from pilot to operating system of business." },
     brief: "Before any company can use AI, they need the plumbing to deploy it, manage it, and trust it. This layer is the enterprise middleware of the AI era — deployment platforms that get models into production, vector databases that give AI systems memory, and workflow tools that connect intelligence to action. These businesses benefit from a dynamic that most investors miss: they are not betting on which AI model wins. They sit beneath all of them, growing regardless of which foundation model dominates.",
     bullets: ["AI Deployment Platforms","Data Management (e.g., Snowflake, Databricks)","Workflow Automation Tools"],
     cos: [
-      { t:"FLOW", n:"FlowOps", w:"AI deployment platform used by 60% of Fortune 500 AI teams." },
-      { t:"DTVX", n:"DataVex", w:"Vector DB infrastructure — memory layer for every RAG system." },
-      { t:"AUTM", n:"AutoMesh", w:"Workflow automation connecting AI models to enterprise systems." },
-      { t:"MLOP", n:"MLOpsHub", w:"Model monitoring and governance as AI regulation tightens." }
+      { t:"SNOW", n:"Snowflake",  w:"The data cloud that feeds AI models — every enterprise RAG system runs on data stored in Snowflake." },
+      { t:"DDOG", n:"Datadog",    w:"Monitoring platform expanding into AI observability — every AI deployment needs Datadog watching it." },
+      { t:"MDB",  n:"MongoDB",    w:"Document database becoming the default store for AI application state and vector embeddings." },
+      { t:"PLTR", n:"Palantir",   w:"AI deployment platform for governments and enterprises — AIP is the fastest-growing enterprise AI product." }
     ]
   },
   {
     name: "Apps & Services",
     sp: { val:82, label:"2.3x S&P", tag:"green", tagLabel:"Outperform", desc:"Projected 5yr outperformance vs S&P 500" },
     maturity: { val:68, label:"Maturing", tag:"gold", tagLabel:"Mid Cycle", desc:"Leading verticals established — focus shifts to margin expansion" },
-    risk: { val:40, label:"Balanced", tag:"gold", tagLabel:"Balanced", fillColor:"#c9a84c", desc:"Keystone picks screened for regulatory clarity & proven unit economics" },
+    risk: { val:40, label:"Balanced", tag:"gold", tagLabel:"Balanced", fillColor:"#c9a84c", desc:"Picks screened for regulatory clarity and proven unit economics" },
     moon: { num:"8x", pct:26, tagLabel:"Steady Upside", note:"More mature layer, but picks with dominant vertical positions — healthcare AI, logistics AI — could 8x as AI billing becomes standard across regulated industries over the next 5 years." },
     brief: "This is where AI touches the real world — and where the revenue is already visible. The companies in this layer are not selling potential; they are selling products that hospitals, car manufacturers, and logistics networks are paying for today. The opportunity here is different from the layers below: it's about identifying which verticals have the strongest regulatory moats, the clearest billing models, and the deepest switching costs. A healthcare AI company with FDA clearance is not just a software company — it is a regulated infrastructure provider with a multi-year competitive advantage built in.",
     bullets: ["Communication (e.g., Chatbots)","Automotive (e.g., Self-driving Tech)","Health Care (e.g., Diagnostics, Surgical Robotics)","and others (e.g., Healthcare Billing, Logistics Optimization, Creative Tools)"],
     cos: [
-      { t:"CHBT", n:"ChatBase", w:"Conversational AI platform — 200M monthly active users." },
-      { t:"DXMD", n:"DiagnoX Med", w:"FDA-cleared AI diagnostics — first-mover regulatory moat." },
-      { t:"LOGI", n:"LogiSense", w:"AI logistics optimization for top 10 global shipping companies." },
-      { t:"CRTV", n:"CreativeOS", w:"Generative creative suite dominating SMB market — sticky SaaS." }
+      { t:"ISRG", n:"Intuitive Surgical", w:"Da Vinci robotic surgery system is the gold standard — AI-enhanced procedures growing 20% annually." },
+      { t:"TSLA", n:"Tesla",              w:"Full Self-Driving and Optimus robot represent the largest real-world AI deployment outside the cloud." },
+      { t:"UBER", n:"Uber",               w:"Routing and demand prediction run on proprietary AI — quietly one of the most AI-native businesses at scale." },
+      { t:"CRM",  n:"Salesforce",         w:"Einstein AI is embedded across every enterprise sales workflow — 150,000 companies run on Salesforce AI." }
     ]
   }
 ];
+
+// ── LIVE PRICES VIA FINNHUB ──
+// Get your free API key at https://finnhub.io — replace the string below
+const FINNHUB_KEY = 'd7a9urpr01qn9i7k66f0d7a9urpr01qn9i7k66fg';
+const liveCache = {};
+
+async function fetchQuote(ticker) {
+  if (liveCache[ticker] && Date.now() - liveCache[ticker].ts < 60000) return liveCache[ticker];
+  try {
+    const r = await fetch(`https://finnhub.io/api/v1/quote?symbol=${ticker}&token=${FINNHUB_KEY}`);
+    const d = await r.json();
+    if (d && d.c) {
+      const result = { p: d.c.toFixed(2), ch: d.dp ? d.dp.toFixed(2) : '0.00', v: '—', ts: Date.now() };
+      liveCache[ticker] = result;
+      return result;
+    }
+  } catch(e) {}
+  return null;
+}
+
+async function loadLivePrices(cos) {
+  if (FINNHUB_KEY === 'YOUR_FINNHUB_API_KEY') return; // skip if no key
+  for (const c of cos) {
+    const q = await fetchQuote(c.t);
+    if (q) {
+      prices[c.t] = q;
+      const up = parseFloat(q.ch) >= 0;
+      const ve = document.getElementById('v-' + c.t);
+      const ce = document.getElementById('c-' + c.t);
+      if (ve) ve.textContent = '$' + q.p;
+      if (ce) { ce.textContent = (up ? '+' : '') + q.ch + '%'; ce.className = 'co-chg ' + (up ? 'up' : 'dn'); }
+    }
+  }
+}
 
 let active = null, ivs = [], prices = {};
 const rp  = () => (Math.random() * 800 + 60).toFixed(2);
@@ -612,6 +646,7 @@ function openCard(idx) {
   initPrices(d.cos);
   document.getElementById('coGrid').innerHTML = renderCos(d.cos);
   startTick(d.cos);
+  loadLivePrices(d.cos);
 
   document.getElementById('main').classList.add('panel-open');
 
