@@ -41,21 +41,23 @@ body {
 /* ── HEADER ── */
 .header {
   text-align: center;
-  padding: 24px 24px 8px;
+  padding: 20px 24px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
 }
 .header-logo {
-  height: clamp(160px, 20vw, 280px);
+  height: clamp(60px, 8vw, 100px);
   width: auto;
   display: block;
-  margin: 0 auto 4px;
 }
 .header-sub {
   font-family: var(--font-ui);
   font-size: 11px;
   letter-spacing: .2em;
   color: var(--dim);
-  margin-top: 0;
-  margin-bottom: 8px;
+  margin: 0 0 12px;
 }
 
 /* ── LAYOUT ── */
@@ -307,11 +309,13 @@ body {
 }
 
 /* ── PAGE FOOTER ── */
-.page-footer {
-  text-align: center; padding: 32px 40px 40px;
+.disclaimer {
+  text-align: center;
+  padding: 16px 40px 40px;
   border-top: 1px solid #c9a84c0a;
-  font-size: 11px; color: var(--dim); letter-spacing: .1em;
-  max-width: 860px; margin: 0 auto; line-height: 1.6;
+  font-size: 10px; color: var(--dim);
+  letter-spacing: .06em; line-height: 1.8;
+  max-width: 860px; margin: 0 auto;
 }
 
 /* ── SCAN ANIMATION ── */
@@ -414,10 +418,10 @@ body {
   </div>
 </div>
 
-<footer class="page-footer"><strong>Keystone Atlas</strong> &nbsp;|&nbsp; For Educational Purposes Only<br>
-    <span style="font-weight:400;letter-spacing:.04em;line-height:1.8">
-    The content presented on this platform is intended solely for educational and informational purposes. Nothing on this website constitutes financial advice, investment advice, trading advice, or any other form of professional financial guidance. Keystone Atlas does not recommend the purchase or sale of any security, and all examples, company names, tickers, and performance projections shown are illustrative only. Past performance is not indicative of future results. All investment involves risk, including the possible loss of principal. Live price data is sourced from Finnhub and may be delayed or inaccurate. Always consult a qualified financial advisor before making investment decisions.
-    </span></footer>
+<div class="disclaimer">
+  <strong style="color:var(--muted);letter-spacing:.08em">KEYSTONE ATLAS</strong> &nbsp;|&nbsp; For Educational Purposes Only<br>
+  <span>The content presented on this platform is intended solely for educational and informational purposes. Nothing on this website constitutes financial advice, investment advice, trading advice, or any other form of professional financial guidance. Keystone Atlas does not recommend the purchase or sale of any security, and all examples, company names, tickers, and performance projections shown are illustrative only. Past performance is not indicative of future results. All investment involves risk, including the possible loss of principal. Live price data is sourced from Finnhub and may be delayed or inaccurate. Always consult a qualified financial advisor before making investment decisions.</span>
+</div>
 
 <script>
 const DATA = [
