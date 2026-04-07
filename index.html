@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Keystone Atlas — Six Layer Pyramid</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Rajdhani:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:       #07101d;
+  --bg2:      #0d1829;
+  --bg3:      #0a1420;
+  --gold:     #c9a84c;
+  --gold-dim: #c9a84c33;
+  --gold-mid: #c9a84c22;
+  --silver:   #b8c0d0;
+  --muted:    #7a8090;
+  --dim:      #3a4255;
+  --deep:     #1e2a3a;
+  --green:    #4caf84;
+  --blue:     #4a8fc9;
+  --purple:   #a98be8;
+  --purple-bg:#0a1020;
+  --red:      #e05555;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-ui:      'Rajdhani', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--silver);
+  font-family: var(--font-ui);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── HEADER ── */
+.header {
+  text-align: center;
+  padding: 48px 24px 36px;
+}
+.header-title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 5vw, 52px);
+  font-weight: 300;
+  letter-spacing: .18em;
+  color: #e8e4d8;
+}
+.header-title span { color: var(--gold); }
+.header-sub {
+  font-family: var(--font-ui);
+  font-size: 10px;
+  letter-spacing: .35em;
+  color: var(--dim);
+  margin-top: 8px;
+}
+
+/* ── LAYOUT ── */
+.main {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0;
+  padding: 0 24px 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.pyramid-col {
+  flex: 0 0 auto;
+  width: 100%;
+  max-width: 560px;
+  transition: max-width .4s ease;
+}
+
+.main.panel-open .pyramid-col {
+  max-width: 480px;
+}
+
+/* ── PYRAMID SVG ── */
+.pyramid-svg {
+  width: 100%;
+  display: block;
+  cursor: default;
+}
+
+.pyr-layer {
+  cursor: pointer;
+  transition: filter .2s;
+}
+.pyr-layer:hover { filter: brightness(1.2); }
+.pyr-layer.active polygon { stroke: var(--gold) !important; stroke-width: 1.5 !important; }
+
+/* ── PANEL ── */
+.panel-col {
+  flex: 0 0 0;
+  width: 0;
+  overflow: hidden;
+  transition: flex .45s cubic-bezier(.25,.8,.25,1), opacity .3s ease;
+  opacity: 0;
+}
+.main.panel-open .panel-col {
+  flex: 0 0 440px;
+  width: 440px;
+  opacity: 1;
+  overflow: visible;
+}
+
+.panel-inner {
+  width: 440px;
+  min-height: 600px;
+  background: var(--bg2);
+  border-left: 1px solid var(--gold-dim);
+  padding: 28px 28px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* mobile: stack vertically */
+@media (max-width: 780px) {
+  .main {
+    flex-direction: column;
+    align-items: center;
+    padding: 0 16px 60px;
+  }
+  .main.panel-open .pyramid-col { max-width: 100%; }
+  .panel-col, .main.panel-open .panel-col {
+    flex: none !important;
+    width: 100% !important;
+    max-width: 560px;
+    opacity: 1 !important;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height .5s ease, opacity .3s ease;
+  }
+  .main.panel-open .panel-col { max-height: 2400px; }
+  .panel-inner { width: 100%; border-left: none; border-top: 1px solid var(--gold-dim); }
+}
+
+/* ── PANEL HEAD ── */
+.panel-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #c9a84c18;
+  margin-bottom: 22px;
+}
+.panel-head-left { display: flex; align-items: center; gap: 12px; }
+.panel-icon {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: #c9a84c12; border: 1px solid var(--gold-dim);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.panel-title {
+  font-family: var(--font-display);
+  font-size: 22px; font-weight: 300;
+  color: #e8e4d8; letter-spacing: .04em;
+}
+.panel-subtitle {
+  font-size: 9px; letter-spacing: .22em;
+  color: var(--gold); margin-top: 3px; text-transform: uppercase;
+}
+.close-btn {
+  background: none; border: none; color: var(--dim);
+  font-size: 22px; cursor: pointer; line-height: 1; padding: 0;
+  transition: color .2s;
+}
+.close-btn:hover { color: var(--gold); }
+
+/* ── METRICS ── */
+.metrics { display: flex; flex-direction: column; gap: 16px; margin-bottom: 22px; }
+.metric { display: flex; flex-direction: column; gap: 5px; }
+.metric-header { display: flex; align-items: center; justify-content: space-between; }
+.metric-label { font-size: 9px; letter-spacing: .2em; color: var(--dim); text-transform: uppercase; }
+.metric-right { display: flex; align-items: center; gap: 7px; }
+.metric-val { font-size: 14px; font-weight: 400; color: #e8e4d8; }
+.tag {
+  font-size: 8px; letter-spacing: .1em; text-transform: uppercase;
+  padding: 2px 7px; border-radius: 3px;
+}
+.tag-green  { background: #4caf8420; color: var(--green); border: 1px solid #4caf8430; }
+.tag-gold   { background: #c9a84c20; color: var(--gold);  border: 1px solid var(--gold-dim); }
+.tag-moon   { background: #7c5cbf20; color: var(--purple); border: 1px solid #7c5cbf44; }
+.track {
+  height: 3px; background: #0e1929; border-radius: 2px;
+  overflow: hidden; position: relative;
+}
+.track-moon { height: 4px; background: #0e1929; border-radius: 2px; overflow: hidden; }
+.fill {
+  height: 100%; border-radius: 2px; width: 0;
+  transition: width 1.1s cubic-bezier(.4,0,.2,1);
+}
+.fill-gold   { background: var(--gold); }
+.fill-blue   { background: var(--blue); }
+.fill-green  { background: var(--green); }
+.fill-moon   { background: linear-gradient(90deg, #4a3f8f, var(--purple)); }
+.track-marker {
+  position: absolute; top: -3px; height: 9px;
+  width: 1px; background: #ffffff15;
+}
+.metric-note { font-size: 9px; color: #2a3245; margin-top: 3px; line-height: 1.5; }
+
+/* moonshot card */
+.moonshot-card {
+  background: var(--purple-bg);
+  border: 1px solid #7c5cbf33;
+  border-radius: 6px; padding: 14px;
+}
+.moonshot-top {
+  display: flex; align-items: flex-start;
+  justify-content: space-between; margin-bottom: 10px;
+}
+.moonshot-label { font-size: 9px; letter-spacing: .18em; color: #6a4fbf; text-transform: uppercase; }
+.moonshot-sub   { font-size: 9px; color: #6a4fbf; margin-top: 2px; }
+.moonshot-num   { font-family: var(--font-display); font-size: 32px; font-weight: 300; color: var(--purple); line-height: 1; }
+.moonshot-note  { font-size: 10px; color: #5a4a80; margin-top: 10px; line-height: 1.6; font-style: italic; }
+
+/* ── DIVIDER ── */
+.divider { height: 1px; background: #c9a84c0f; margin: 20px 0; }
+
+/* ── INTEL ── */
+.sec-label { font-size: 9px; letter-spacing: .22em; color: var(--dim); text-transform: uppercase; margin-bottom: 10px; }
+.intel-brief {
+  font-size: 12px; color: #6a7585; line-height: 1.75;
+  padding: 14px 14px 14px 16px;
+  background: #0a1120;
+  border-left: 2px solid var(--gold-dim);
+  border-radius: 0 4px 4px 0;
+  margin-bottom: 14px;
+}
+.bullets { margin-bottom: 4px; }
+.bullet {
+  display: flex; align-items: flex-start; gap: 8px;
+  padding: 7px 0; border-bottom: 1px solid #0e1929;
+}
+.bullet:last-child { border-bottom: none; }
+.bullet-dash { color: var(--gold); font-size: 12px; margin-top: 1px; flex-shrink: 0; }
+.bullet-text { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+/* ── COMPANIES ── */
+.cos-header {
+  display: flex; align-items: center;
+  justify-content: space-between; margin-bottom: 12px;
+}
+.rfr-btn {
+  background: none; border: 1px solid var(--gold-dim);
+  color: var(--gold); font-size: 9px; font-family: var(--font-ui);
+  letter-spacing: .14em; text-transform: uppercase;
+  padding: 6px 12px; border-radius: 4px;
+  cursor: pointer; display: flex; align-items: center; gap: 5px;
+  transition: border-color .2s, background .2s;
+}
+.rfr-btn:hover { border-color: var(--gold); background: #c9a84c0a; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.spinning { animation: spin .5s linear; }
+
+.co-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+@media (max-width: 500px) {
+  .co-grid { grid-template-columns: 1fr; }
+}
+
+.co-card {
+  background: var(--bg3);
+  border: 1px solid #c9a84c15;
+  border-radius: 6px; padding: 12px 14px;
+  position: relative; cursor: default;
+  transition: border-color .2s;
+}
+.co-card:hover { border-color: var(--gold-dim); }
+.co-card:hover .co-tip { display: block; }
+.co-top {
+  display: flex; align-items: flex-start;
+  justify-content: space-between; margin-bottom: 8px;
+}
+.co-name  { font-size: 13px; color: #e8e4d8; display: block; margin-bottom: 2px; }
+.co-tick  { font-size: 10px; color: var(--dim); letter-spacing: .06em; }
+.co-chg   { font-size: 13px; font-weight: 500; display: block; text-align: right; }
+.co-arrow { font-size: 10px; display: block; text-align: right; }
+.co-bot   { display: flex; align-items: center; justify-content: space-between; }
+.co-price { font-size: 12px; color: #5a6070; font-family: monospace; letter-spacing: .04em; }
+.co-vol   { font-size: 9px; color: #2a3245; }
+.up { color: var(--green); }
+.dn { color: var(--red); }
+.co-tip {
+  display: none;
+  position: absolute; bottom: calc(100% + 6px); left: 0; right: 0;
+  background: #0f1e35; border: 1px solid var(--gold-dim);
+  border-radius: 6px; padding: 10px 12px;
+  font-size: 10px; color: var(--muted); line-height: 1.6; z-index: 20;
+}
+
+/* ── FOOTER ── */
+.panel-footer {
+  margin-top: auto; padding-top: 20px;
+  font-size: 9px; color: var(--deep);
+  text-align: center; letter-spacing: .08em;
+}
+
+/* ── PAGE FOOTER ── */
+.page-footer {
+  text-align: center; padding: 32px 24px;
+  border-top: 1px solid #c9a84c0a;
+  font-size: 9px; color: var(--deep); letter-spacing: .14em;
+}
+
+/* ── SCAN ANIMATION ── */
+@keyframes scanUp {
+  0%   { transform: translateY(0); opacity: .6; }
+  100% { transform: translateY(-420px); opacity: 0; }
+}
+.scan-line {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  height: 1px; background: var(--gold);
+  opacity: 0; pointer-events: none;
+  animation: scanUp 1.4s ease-in .3s forwards;
+}
+
+/* ── LAYER FADE IN ── */
+@keyframes layerIn {
+  from { opacity: 0; transform: scaleX(.94) translateY(6px); }
+  to   { opacity: 1; transform: scaleX(1) translateY(0); }
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-title">KEYSTONE <span>ATLAS</span></div>
+  <div class="header-sub">— SIX LAYER PYRAMID —</div>
+</header>
+
+<div class="main" id="main">
+  <div class="pyramid-col">
+    <div style="position:relative;max-width:560px;margin:0 auto">
+      <div class="scan-line"></div>
+      <svg class="pyramid-svg" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+
+        <g class="pyr-layer" id="pl-0" onclick="openCard(0)">
+          <polygon points="0,390 600,390 553,330 47,330" fill="#0b1420" stroke="#c9a84c55" stroke-width="1" style="animation:layerIn .4s ease .05s both"/>
+          <text x="300" y="362" text-anchor="middle" dominant-baseline="central" fill="#c9a84c" font-size="9" letter-spacing="4" font-family="Rajdhani,sans-serif" pointer-events="none" style="animation:layerIn .4s ease .05s both">ENERGY &amp; POWER</text>
+        </g>
+
+        <g class="pyr-layer" id="pl-1" onclick="openCard(1)">
+          <polygon points="47,330 553,330 505,270 95,270" fill="#0e1727" stroke="#c9a84c1a" stroke-width="0.8" style="animation:layerIn .4s ease .18s both"/>
+          <text x="300" y="301" text-anchor="middle" dominant-baseline="central" fill="#b8c0d0" font-size="9" letter-spacing="3" font-family="Rajdhani,sans-serif" pointer-events="none" style="animation:layerIn .4s ease .18s both">CHIPS &amp; HARDWARE</text>
+        </g>
+
+        <g class="pyr-layer" id="pl-2" onclick="openCard(2)">
+          <polygon points="95,270 505,270 458,210 142,210" fill="#111b2e" stroke="#c9a84c22" stroke-width="0.8" style="animation:layerIn .4s ease .32s both"/>
+          <text x="300" y="241" text-anchor="middle" dominant-baseline="central" fill="#b8c0d0" font-size="9" letter-spacing="3" font-family="Rajdhani,sans-serif" pointer-events="none" style="animation:layerIn .4s ease .32s both">DATA CENTERS</text>
+        </g>
+
+        <g class="pyr-layer" id="pl-3" onclick="openCard(3)">
+          <polygon points="142,210 458,210 411,150 189,150" fill="#152035" stroke="#c9a84c2a" stroke-width="0.8" style="animation:layerIn .4s ease .46s both"/>
+          <text x="300" y="181" text-anchor="middle" dominant-baseline="central" fill="#b8c0d0" font-size="9" letter-spacing="3" font-family="Rajdhani,sans-serif" pointer-events="none" style="animation:layerIn .4s ease .46s both">MODEL COMPANIES</text>
+        </g>
+
+        <g class="pyr-layer" id="pl-4" onclick="openCard(4)">
+          <polygon points="189,150 411,150 363,90 237,90" fill="#192640" stroke="#c9a84c33" stroke-width="0.8" style="animation:layerIn .4s ease .60s both"/>
+          <text x="300" y="121" text-anchor="middle" dominant-baseline="central" fill="#b8c0d0" font-size="7" letter-spacing="1.5" font-family="Rajdhani,sans-serif" pointer-events="none" style="animation:layerIn .4s ease .60s both">SOFTWARE INFRASTRUCTURE</text>
+        </g>
+
+        <g class="pyr-layer" id="pl-5" onclick="openCard(5)">
+          <polygon points="237,90 363,90 300,10" fill="#1d2d4a" stroke="#c9a84c55" stroke-width="0.8" style="animation:layerIn .4s ease .74s both"/>
+          <text x="300" y="72" text-anchor="middle" dominant-baseline="central" fill="#c9a84c" font-size="6.5" letter-spacing="1.5" font-family="Rajdhani,sans-serif" pointer-events="none" style="animation:layerIn .4s ease .74s both">APPS &amp; SERVICES</text>
+        </g>
+
+      </svg>
+    </div>
+  </div>
+
+  <div class="panel-col" id="panelCol">
+    <div class="panel-inner">
+      <div class="panel-head">
+        <div class="panel-head-left">
+          <div class="panel-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#c9a84c" stroke-width="1.5"><polyline points="2,12 6,7 9,10 14,4"/></svg>
+          </div>
+          <div>
+            <div class="panel-title" id="panelTitle">—</div>
+            <div class="panel-subtitle">Alpha Analysis</div>
+          </div>
+        </div>
+        <button class="close-btn" onclick="closePanel()">×</button>
+      </div>
+
+      <div class="metrics" id="metricsBlock"></div>
+
+      <div class="divider"></div>
+      <div class="sec-label">Layer Intelligence</div>
+      <div class="intel-brief" id="intelBrief"></div>
+      <div class="bullets" id="bulletList"></div>
+
+      <div class="divider"></div>
+      <div class="cos-header">
+        <div class="sec-label">Keystone Companies</div>
+        <button class="rfr-btn" onclick="refresh()"><span id="rfrIcon">↻</span> Refresh Signal</button>
+      </div>
+      <div class="co-grid" id="coGrid"></div>
+
+      <div class="panel-footer">Prices simulated for demonstration &nbsp;·&nbsp; Scores are model-generated estimates</div>
+    </div>
+  </div>
+</div>
+
+<footer class="page-footer">© Keystone Atlas &nbsp;·&nbsp; For accredited investors only &nbsp;·&nbsp; Not financial advice</footer>
+
+<script>
+const DATA = [
+  {
+    name: "Energy & Power",
+    sp: { val:78, label:"2.1x S&P", tag:"green", tagLabel:"Outperform", desc:"Projected 5yr outperformance vs S&P 500" },
+    maturity: { val:18, label:"Early Stage", tag:"green", tagLabel:"Early Entry", desc:"Infrastructure buildout just beginning — long runway ahead" },
+    risk: { val:28, label:"Low Risk", tag:"green", tagLabel:"Favorable", fillColor:"#4caf84", desc:"Keystone picks selected for contracted revenue & regulated assets" },
+    moon: { num:"100x", pct:95, tagLabel:"Moonshot", note:"If AI data center power demand doubles by 2026 as projected, early-position energy infrastructure picks could see 100x returns — the same asymmetry as buying fiber in 1998." },
+    brief: "Every AI model that runs — every query answered, every image generated — requires electricity. The AI buildout is creating a power demand shock unlike anything since the industrial revolution, and the grid is not ready for it. Utilities that locked in long-term data center contracts early, clean energy firms with hyperscaler agreements, and small modular reactor developers are sitting at the base of a wave that hasn't broken yet. This is the layer most investors overlook because it isn't glamorous — which is exactly why the opportunity exists.",
+    bullets: ["Data Center Power","Grid Support","Clean Energy Solutions","Reliable Electricity"],
+    cos: [
+      { t:"VOLT", n:"Volt Grid Co.", w:"Controls 18% of AI data center power contracts globally." },
+      { t:"SOLX", n:"SolarX Systems", w:"Only clean-energy firm with direct agreements to 4 hyperscalers." },
+      { t:"NUC1", n:"NuclearOne", w:"SMR pipeline positions it as baseline power of the AI era." },
+      { t:"AMPR", n:"Ampere Power", w:"Grid stabilization tech critical as AI energy demand spikes." }
+    ]
+  },
+  {
+    name: "Chips & Hardware",
+    sp: { val:92, label:"3.4x S&P", tag:"green", tagLabel:"Outperform", desc:"Projected 5yr outperformance vs S&P 500" },
+    maturity: { val:52, label:"Growth Phase", tag:"gold", tagLabel:"Mid Cycle", desc:"Maturing but AI demand acceleration still ahead of supply" },
+    risk: { val:42, label:"Balanced", tag:"gold", tagLabel:"Balanced", fillColor:"#c9a84c", desc:"Keystone picks weighted toward fabless designers with diversified clients" },
+    moon: { num:"40x", pct:72, tagLabel:"High Upside", note:"If AI accelerator demand continues compounding at current rates, picks made at this stage of the chip cycle historically return 40x over a decade — similar to NVIDIA's trajectory from 2015." },
+    brief: "AI runs on silicon. Every foundation model, every inference call, every autonomous system requires specialized processors that general-purpose chips simply cannot handle efficiently. The market learned this with NVIDIA — but NVIDIA's rise revealed a structural gap: one company cannot supply the world. The next wave belongs to the firms building AI accelerators for specific workloads, the foundries capable of manufacturing at sub-3nm scale, and the memory architects solving the bandwidth bottleneck that limits how fast models can actually think.",
+    bullets: ["Processing Units (GPUs, AI Accelerators)","Manufacturing (Foundries)","Advanced Chip Design"],
+    cos: [
+      { t:"GPUX", n:"GPUx Inc.", w:"AI inference chips at 3x efficiency over incumbents." },
+      { t:"FNDR", n:"Foundry Prime", w:"Only non-TSMC option for sub-3nm AI accelerator production." },
+      { t:"SILV", n:"SilverLogic", w:"Memory bandwidth architecture — the hidden bottleneck solved." },
+      { t:"AXON", n:"AxonChip", w:"Fastest time-to-silicon for custom LLM training ASICs." }
+    ]
+  },
+  {
+    name: "Data Centers",
+    sp: { val:85, label:"2.7x S&P", tag:"green", tagLabel:"Outperform", desc:"Projected 5yr outperformance vs S&P 500" },
+    maturity: { val:44, label:"Expansion Phase", tag:"gold", tagLabel:"Mid Cycle", desc:"AI workloads driving a new build cycle with long lead times" },
+    risk: { val:22, label:"Low Risk", tag:"green", tagLabel:"Favorable", fillColor:"#4caf84", desc:"Keystone picks are REIT-structured with hyperscaler anchor tenants" },
+    moon: { num:"25x", pct:58, tagLabel:"Strong Upside", note:"If hyperscaler capex commitments hold and edge computing expands, data center REITs and cooling plays could 25x — with the added security of hard asset backing throughout." },
+    brief: "Data centers are the factories of the AI economy. Unlike software, they require years to plan, permit, and build — which means the supply shortage being felt today will persist for at least a decade. The most defensible positions are in colocation providers with power already secured, cooling technology companies solving the thermal crisis that dense GPU racks create, and real estate operators whose land sits on the right side of fiber and power infrastructure. These are hard assets in an era of digital abundance — a rare combination.",
+    bullets: ["Server Colocation","Power & Space","High-Performance Cooling","Real Estate"],
+    cos: [
+      { t:"COLX", n:"ColoX REIT", w:"12 hyperscale campuses in low-latency fiber corridors." },
+      { t:"CRYO", n:"CryoCool", w:"Liquid cooling reduces PUE to 1.05 as rack density rises." },
+      { t:"EDGN", n:"EdgeNest", w:"Edge DC rollout matches AI inference moving to the edge." },
+      { t:"PWRB", n:"PowerBlock", w:"Modular power units allow rapid expansion with no grid upgrade." }
+    ]
+  },
+  {
+    name: "Model Companies",
+    sp: { val:96, label:"4.8x S&P", tag:"green", tagLabel:"Outperform", desc:"Projected 5yr outperformance vs S&P 500" },
+    maturity: { val:35, label:"Early Growth", tag:"green", tagLabel:"Early Entry", desc:"Foundation model race still wide open — significant upside ahead" },
+    risk: { val:48, label:"Balanced", tag:"gold", tagLabel:"Balanced", fillColor:"#c9a84c", desc:"Keystone picks focused on enterprise API revenue, not consumer bets" },
+    moon: { num:"60x", pct:82, tagLabel:"Moonshot", note:"The winning foundation model company could become the most valuable business in history. Picks made before enterprise consolidation locks in — when the market doubles — could return 60x on selected positions." },
+    brief: "Foundation models are the new operating systems. Just as Windows and iOS became the platforms everything else was built on, the leading AI models are becoming the invisible infrastructure of every enterprise workflow. The companies that win this layer don't just have good models — they have distribution, API lock-in, and the data flywheel advantages that compound with every new customer. We are still early enough that the winner is not obvious, which is where the asymmetric opportunity lives.",
+    bullets: ["Foundation Models","API Access","Model Development","Strategic Model Partnerships"],
+    cos: [
+      { t:"MODL", n:"ModelCore", w:"Foundation model with highest enterprise adoption in sector." },
+      { t:"APIX", n:"APIxAI", w:"API-first model — infrastructure players build on their rails." },
+      { t:"SYNP", n:"Synapse AI", w:"Multimodal model dominant in healthcare diagnostics." },
+      { t:"PARA", n:"ParaLLM", w:"Open-weight model with fastest growing developer ecosystem." }
+    ]
+  },
+  {
+    name: "Software Infrastructure",
+    sp: { val:88, label:"3.1x S&P", tag:"green", tagLabel:"Outperform", desc:"Projected 5yr outperformance vs S&P 500" },
+    maturity: { val:48, label:"Scaling Phase", tag:"gold", tagLabel:"Mid Cycle", desc:"Enterprise adoption accelerating with strong switching costs" },
+    risk: { val:35, label:"Low Risk", tag:"green", tagLabel:"Favorable", fillColor:"#4caf84", desc:"Keystone picks chosen for sticky SaaS models with high retention" },
+    moon: { num:"15x", pct:42, tagLabel:"Solid Upside", note:"As every enterprise deploys AI, the infrastructure stack beneath them compounds quietly. Picks with deep workflow integration could 15x as AI moves from pilot to operating system of business." },
+    brief: "Before any company can use AI, they need the plumbing to deploy it, manage it, and trust it. This layer is the enterprise middleware of the AI era — deployment platforms that get models into production, vector databases that give AI systems memory, and workflow tools that connect intelligence to action. These businesses benefit from a dynamic that most investors miss: they are not betting on which AI model wins. They sit beneath all of them, growing regardless of which foundation model dominates.",
+    bullets: ["AI Deployment Platforms","Data Management (e.g., Snowflake, Databricks)","Workflow Automation Tools"],
+    cos: [
+      { t:"FLOW", n:"FlowOps", w:"AI deployment platform used by 60% of Fortune 500 AI teams." },
+      { t:"DTVX", n:"DataVex", w:"Vector DB infrastructure — memory layer for every RAG system." },
+      { t:"AUTM", n:"AutoMesh", w:"Workflow automation connecting AI models to enterprise systems." },
+      { t:"MLOP", n:"MLOpsHub", w:"Model monitoring and governance as AI regulation tightens." }
+    ]
+  },
+  {
+    name: "Apps & Services",
+    sp: { val:82, label:"2.3x S&P", tag:"green", tagLabel:"Outperform", desc:"Projected 5yr outperformance vs S&P 500" },
+    maturity: { val:68, label:"Maturing", tag:"gold", tagLabel:"Mid Cycle", desc:"Leading verticals established — focus shifts to margin expansion" },
+    risk: { val:40, label:"Balanced", tag:"gold", tagLabel:"Balanced", fillColor:"#c9a84c", desc:"Keystone picks screened for regulatory clarity & proven unit economics" },
+    moon: { num:"8x", pct:26, tagLabel:"Steady Upside", note:"More mature layer, but picks with dominant vertical positions — healthcare AI, logistics AI — could 8x as AI billing becomes standard across regulated industries over the next 5 years." },
+    brief: "This is where AI touches the real world — and where the revenue is already visible. The companies in this layer are not selling potential; they are selling products that hospitals, car manufacturers, and logistics networks are paying for today. The opportunity here is different from the layers below: it's about identifying which verticals have the strongest regulatory moats, the clearest billing models, and the deepest switching costs. A healthcare AI company with FDA clearance is not just a software company — it is a regulated infrastructure provider with a multi-year competitive advantage built in.",
+    bullets: ["Communication (e.g., Chatbots)","Automotive (e.g., Self-driving Tech)","Health Care (e.g., Diagnostics, Surgical Robotics)","and others (e.g., Healthcare Billing, Logistics Optimization, Creative Tools)"],
+    cos: [
+      { t:"CHBT", n:"ChatBase", w:"Conversational AI platform — 200M monthly active users." },
+      { t:"DXMD", n:"DiagnoX Med", w:"FDA-cleared AI diagnostics — first-mover regulatory moat." },
+      { t:"LOGI", n:"LogiSense", w:"AI logistics optimization for top 10 global shipping companies." },
+      { t:"CRTV", n:"CreativeOS", w:"Generative creative suite dominating SMB market — sticky SaaS." }
+    ]
+  }
+];
+
+let active = null, ivs = [], prices = {};
+const rp  = () => (Math.random() * 800 + 60).toFixed(2);
+const rc  = () => ((Math.random() - .47) * 6).toFixed(2);
+const vol = () => (Math.random() * 50 + 2).toFixed(1) + 'M';
+const initPrices = cos => cos.forEach(c => { prices[c.t] = { p: rp(), ch: rc(), v: vol() }; });
+
+function renderMetrics(d) {
+  return `
+    <div class="metric">
+      <div class="metric-header">
+        <span class="metric-label">Growth vs S&amp;P 500</span>
+        <div class="metric-right"><span class="metric-val">${d.sp.label}</span><span class="tag tag-${d.sp.tag}">${d.sp.tagLabel}</span></div>
+      </div>
+      <div class="track"><div class="fill fill-gold" id="bar-sp" style="width:0%"></div><div class="track-marker" style="left:20%"></div></div>
+      <div class="metric-note">${d.sp.desc}</div>
+    </div>
+    <div class="metric">
+      <div class="metric-header">
+        <span class="metric-label">Growth vs Maturity</span>
+        <div class="metric-right"><span class="metric-val">${d.maturity.label}</span><span class="tag tag-${d.maturity.tag}">${d.maturity.tagLabel}</span></div>
+      </div>
+      <div class="track"><div class="fill fill-blue" id="bar-mat" style="width:0%"></div><div class="track-marker" style="left:50%"></div></div>
+      <div class="metric-note">${d.maturity.desc}</div>
+    </div>
+    <div class="metric">
+      <div class="metric-header">
+        <span class="metric-label">Growth vs Risk Level</span>
+        <div class="metric-right"><span class="metric-val">${d.risk.label}</span><span class="tag tag-${d.risk.tag}">${d.risk.tagLabel}</span></div>
+      </div>
+      <div class="track"><div class="fill" id="bar-risk" style="width:0%;background:${d.risk.fillColor}"></div></div>
+      <div class="metric-note">${d.risk.desc}</div>
+    </div>
+    <div class="moonshot-card">
+      <div class="moonshot-top">
+        <div>
+          <div class="moonshot-label">Growth Potential — Selected Picks</div>
+          <div class="moonshot-sub">If AI market doubles this cycle</div>
+        </div>
+        <div style="text-align:right">
+          <div class="moonshot-num">${d.moon.num}</div>
+          <span class="tag tag-moon" style="display:inline-block;margin-top:5px">${d.moon.tagLabel}</span>
+        </div>
+      </div>
+      <div class="track-moon"><div class="fill fill-moon" id="bar-moon" style="width:0%"></div></div>
+      <div class="moonshot-note">${d.moon.note}</div>
+    </div>`;
+}
+
+function renderBullets(b) {
+  return b.map(x => `<div class="bullet"><span class="bullet-dash">—</span><span class="bullet-text">${x}</span></div>`).join('');
+}
+
+function renderCos(cos) {
+  return cos.map(c => {
+    const d = prices[c.t], up = parseFloat(d.ch) >= 0;
+    return `<div class="co-card">
+      <div class="co-tip">${c.w}</div>
+      <div class="co-top">
+        <div><span class="co-name">${c.n}</span><span class="co-tick">${c.t}</span></div>
+        <div>
+          <span class="co-chg ${up?'up':'dn'}" id="c-${c.t}">${up?'+':''}${d.ch}%</span>
+          <span class="co-arrow ${up?'up':'dn'}">${up?'↗':'↘'}</span>
+        </div>
+      </div>
+      <div class="co-bot">
+        <span class="co-price" id="v-${c.t}">$${d.p}</span>
+        <span class="co-vol">Vol: ${d.v}</span>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function startTick(cos) {
+  ivs.forEach(clearInterval); ivs = [];
+  cos.forEach(c => {
+    ivs.push(setInterval(() => {
+      let p = parseFloat(prices[c.t].p) + (Math.random() - .49) * .9;
+      p = Math.max(10, p);
+      let ch = parseFloat(prices[c.t].ch) + (Math.random() - .49) * .06;
+      prices[c.t].p = p.toFixed(2); prices[c.t].ch = ch.toFixed(2);
+      const up = ch >= 0;
+      const ve = document.getElementById('v-' + c.t);
+      const ce = document.getElementById('c-' + c.t);
+      if (ve) ve.textContent = '$' + prices[c.t].p;
+      if (ce) { ce.textContent = (up ? '+' : '') + prices[c.t].ch + '%'; ce.className = 'co-chg ' + (up ? 'up' : 'dn'); }
+    }, 1800 + Math.random() * 1200));
+  });
+}
+
+function openCard(idx) {
+  const d = DATA[idx]; active = idx;
+
+  // highlight active layer
+  document.querySelectorAll('.pyr-layer').forEach((el, i) => el.classList.toggle('active', i === idx));
+
+  document.getElementById('panelTitle').textContent = d.name;
+  document.getElementById('metricsBlock').innerHTML = renderMetrics(d);
+  document.getElementById('intelBrief').textContent = d.brief;
+  document.getElementById('bulletList').innerHTML = renderBullets(d.bullets);
+  initPrices(d.cos);
+  document.getElementById('coGrid').innerHTML = renderCos(d.cos);
+  startTick(d.cos);
+
+  document.getElementById('main').classList.add('panel-open');
+
+  setTimeout(() => {
+    const bs = document.getElementById('bar-sp');
+    const bm = document.getElementById('bar-mat');
+    const br = document.getElementById('bar-risk');
+    const bn = document.getElementById('bar-moon');
+    if (bs) bs.style.width = d.sp.val + '%';
+    if (bm) bm.style.width = d.maturity.val + '%';
+    if (br) br.style.width = d.risk.val + '%';
+    if (bn) bn.style.width = d.moon.pct + '%';
+  }, 120);
+
+  // on mobile scroll panel into view
+  if (window.innerWidth <= 780) {
+    setTimeout(() => document.getElementById('panelCol').scrollIntoView({ behavior: 'smooth', block: 'start' }), 300);
+  }
+}
+
+function closePanel() {
+  document.getElementById('main').classList.remove('panel-open');
+  document.querySelectorAll('.pyr-layer').forEach(el => el.classList.remove('active'));
+  ivs.forEach(clearInterval); ivs = []; active = null;
+}
+
+function refresh() {
+  if (active === null) return;
+  const ic = document.getElementById('rfrIcon');
+  ic.classList.add('spinning');
+  setTimeout(() => ic.classList.remove('spinning'), 500);
+  const d = DATA[active];
+  initPrices(d.cos);
+  document.getElementById('coGrid').innerHTML = renderCos(d.cos);
+  startTick(d.cos);
+}
+</script>
+</body>
+</html>
