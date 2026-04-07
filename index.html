@@ -378,34 +378,47 @@ body {
     <div style="position:relative;margin:0 auto">
       <div class="scan-line"></div>
       <svg class="pyramid-svg" viewBox="0 0 600 395" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="lg0" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1a2d40"/><stop offset="100%" stop-color="#080f1a"/></linearGradient>
+          <linearGradient id="lg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#172235"/><stop offset="100%" stop-color="#090e1c"/></linearGradient>
+          <linearGradient id="lg2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#14202f"/><stop offset="100%" stop-color="#08101e"/></linearGradient>
+          <linearGradient id="lg3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1a2840"/><stop offset="100%" stop-color="#0c1525"/></linearGradient>
+          <linearGradient id="lg4" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1f2f4a"/><stop offset="100%" stop-color="#101a30"/></linearGradient>
+          <linearGradient id="lg5" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#243550"/><stop offset="100%" stop-color="#141f38"/></linearGradient>
+        </defs>
 
         <g class="pyr-layer" id="pl-0" onclick="openCard(0)">
-          <polygon points="0,390 600,390 553,330 47,330" fill="#0b1420" stroke="#c9a84c55" stroke-width="1" style="animation:layerIn .4s ease .05s both"/>
+          <polygon points="0,390 600,390 553,330 47,330" fill="url(#lg0)" stroke="#c9a84c55" stroke-width="1" style="animation:layerIn .4s ease .05s both"/>
+          <line x1="47" y1="330" x2="553" y2="330" stroke="#c9a84c33" stroke-width="0.8"/>
           <text x="300" y="362" text-anchor="middle" dominant-baseline="central" fill="#c9a84c" font-size="13" letter-spacing="4" font-family="Rajdhani,sans-serif" pointer-events="none" style="animation:layerIn .4s ease .05s both">ENERGY &amp; POWER</text>
         </g>
 
         <g class="pyr-layer" id="pl-1" onclick="openCard(1)">
-          <polygon points="47,330 553,330 505,270 95,270" fill="#0e1727" stroke="#c9a84c1a" stroke-width="0.8" style="animation:layerIn .4s ease .18s both"/>
+          <polygon points="47,330 553,330 505,270 95,270" fill="url(#lg1)" stroke="#c9a84c1a" stroke-width="0.8" style="animation:layerIn .4s ease .18s both"/>
+          <line x1="95" y1="270" x2="505" y2="270" stroke="#ffffff0a" stroke-width="1"/>
           <text x="300" y="301" text-anchor="middle" dominant-baseline="central" fill="#b8c0d0" font-size="13" letter-spacing="3" font-family="Rajdhani,sans-serif" pointer-events="none" style="animation:layerIn .4s ease .18s both">CHIPS &amp; HARDWARE</text>
         </g>
 
         <g class="pyr-layer" id="pl-2" onclick="openCard(2)">
-          <polygon points="95,270 505,270 458,210 142,210" fill="#111b2e" stroke="#c9a84c22" stroke-width="0.8" style="animation:layerIn .4s ease .32s both"/>
+          <polygon points="95,270 505,270 458,210 142,210" fill="url(#lg2)" stroke="#c9a84c22" stroke-width="0.8" style="animation:layerIn .4s ease .32s both"/>
+          <line x1="142" y1="210" x2="458" y2="210" stroke="#ffffff0a" stroke-width="1"/>
           <text x="300" y="241" text-anchor="middle" dominant-baseline="central" fill="#b8c0d0" font-size="13" letter-spacing="3" font-family="Rajdhani,sans-serif" pointer-events="none" style="animation:layerIn .4s ease .32s both">DATA CENTERS</text>
         </g>
 
         <g class="pyr-layer" id="pl-3" onclick="openCard(3)">
-          <polygon points="142,210 458,210 411,150 189,150" fill="#152035" stroke="#c9a84c2a" stroke-width="0.8" style="animation:layerIn .4s ease .46s both"/>
+          <polygon points="142,210 458,210 411,150 189,150" fill="url(#lg3)" stroke="#c9a84c2a" stroke-width="0.8" style="animation:layerIn .4s ease .46s both"/>
+          <line x1="189" y1="150" x2="411" y2="150" stroke="#ffffff0a" stroke-width="1"/>
           <text x="300" y="181" text-anchor="middle" dominant-baseline="central" fill="#b8c0d0" font-size="13" letter-spacing="3" font-family="Rajdhani,sans-serif" pointer-events="none" style="animation:layerIn .4s ease .46s both">MODEL COMPANIES</text>
         </g>
 
         <g class="pyr-layer" id="pl-4" onclick="openCard(4)">
-          <polygon points="189,150 411,150 363,90 237,90" fill="#192640" stroke="#c9a84c33" stroke-width="0.8" style="animation:layerIn .4s ease .60s both"/>
+          <polygon points="189,150 411,150 363,90 237,90" fill="url(#lg4)" stroke="#c9a84c33" stroke-width="0.8" style="animation:layerIn .4s ease .60s both"/>
+          <line x1="237" y1="90" x2="363" y2="90" stroke="#ffffff0a" stroke-width="1"/>
           <text x="300" y="121" text-anchor="middle" dominant-baseline="central" fill="#b8c0d0" font-size="8" letter-spacing="1.5" font-family="Rajdhani,sans-serif" pointer-events="none" style="animation:layerIn .4s ease .60s both">SOFTWARE INFRASTRUCTURE</text>
         </g>
 
         <g class="pyr-layer" id="pl-5" onclick="openCard(5)">
-          <polygon points="237,90 363,90 300,10" fill="#1d2d4a" stroke="#c9a84c55" stroke-width="0.8" style="animation:layerIn .4s ease .74s both"/>
+          <polygon points="237,90 363,90 300,10" fill="url(#lg5)" stroke="#c9a84c55" stroke-width="0.8" style="animation:layerIn .4s ease .74s both"/>
           <text x="300" y="72" text-anchor="middle" dominant-baseline="central" fill="#c9a84c" font-size="7.5" letter-spacing="1.5" font-family="Rajdhani,sans-serif" pointer-events="none" style="animation:layerIn .4s ease .74s both">APPS &amp; SERVICES</text>
         </g>
 
@@ -677,7 +690,7 @@ function startTick(cos) {
 
 function openCard(idx) {
   const hint = document.getElementById('hint');
-  if (hint) hint.style.display = 'none';
+  if (hint) hint.style.opacity = '0';
   const d = DATA[idx]; active = idx;
 
   // highlight active layer
@@ -715,6 +728,8 @@ function closePanel() {
   document.getElementById('main').classList.remove('panel-open');
   document.querySelectorAll('.pyr-layer').forEach(el => el.classList.remove('active'));
   ivs.forEach(clearInterval); ivs = []; active = null;
+  const hint = document.getElementById('hint');
+  if (hint) hint.style.opacity = '1';
 }
 
 function refresh() {
