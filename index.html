@@ -101,6 +101,7 @@ body {
   overflow: hidden;
   transition: flex .45s cubic-bezier(.25,.8,.25,1), opacity .3s ease;
   opacity: 0;
+  min-height: 0;
 }
 .main.panel-open .panel-col {
   flex: 0 0 440px;
@@ -119,6 +120,37 @@ body {
   flex-direction: column;
   gap: 0;
 }
+
+.hint {
+  text-align: center;
+  padding: 10px 0 0;
+  font-size: 11px;
+  color: var(--green);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  opacity: 0;
+  animation: hintIn .6s ease 1.6s forwards;
+}
+.hint-icon {
+  width: 18px; height: 18px;
+  border: 1px solid var(--green);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+@keyframes hintIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: .35; }
+}
+.hint.done { display: none; }
 
 /* mobile: stack vertically */
 @media (max-width: 780px) {
@@ -378,6 +410,12 @@ body {
         </g>
 
       </svg>
+      <div class="hint" id="hint">
+        <div class="hint-icon">
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1.5v5M5 6.5L3 4.5M5 6.5L7 4.5" stroke="#4caf84" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        Click any layer to explore
+      </div>
     </div>
   </div>
 
@@ -638,6 +676,8 @@ function startTick(cos) {
 }
 
 function openCard(idx) {
+  const hint = document.getElementById('hint');
+  if (hint) hint.style.display = 'none';
   const d = DATA[idx]; active = idx;
 
   // highlight active layer
